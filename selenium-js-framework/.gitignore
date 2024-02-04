@@ -1,0 +1,33 @@
+# General
+node_modules/
+.env
+*.log
+.DS_Store
+Thumbs.db
+.cache
+dist/
+build/
+.vscode/
+npm-debug.log
+.idea/
+
+# JavaScript/Node.js
+coverage/
+.nyc_output
+*.tmp
+*.temp
+*.swp
+
+# Frontend
+/public/assets/
+.parcel-cache/
+.next/
+.nuxt/
+/dist/
+
+# Databases
+*.db
+
+# Security
+*.cert
+*.key
