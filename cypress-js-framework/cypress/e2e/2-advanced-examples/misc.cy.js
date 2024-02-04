@@ -22,7 +22,7 @@ context('Misc', () => {
   it('cy.exec() - execute a system command', () => {
     // execute a system command.
     // so you can take actions necessary for
-    // your test outside the scope of Cypress.
+    // your e2e outside the scope of Cypress.
     // https://on.cypress.io/exec
 
     // we can use Cypress.platform string to
@@ -36,7 +36,7 @@ context('Misc', () => {
     const isCircleOnWindows = Cypress.platform === 'win32' && Cypress.env('circle')
 
     if (isCircleOnWindows) {
-      cy.log('Skipping test on CircleCI')
+      cy.log('Skipping e2e on CircleCI')
 
       return
     }
@@ -46,7 +46,7 @@ context('Misc', () => {
     const isShippable = Cypress.platform === 'linux' && Cypress.env('shippable')
 
     if (isShippable) {
-      cy.log('Skipping test on ShippableCI')
+      cy.log('Skipping e2e on ShippableCI')
 
       return
     }

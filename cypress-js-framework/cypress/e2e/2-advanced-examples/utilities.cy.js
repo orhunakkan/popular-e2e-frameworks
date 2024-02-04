@@ -36,7 +36,7 @@ context('Utilities', () => {
         let img = Cypress.$('<img />', { src: dataUrl })
 
         // need to explicitly return cy here since we are initially returning
-        // the Cypress.Blob.imgSrcToDataURL promise to our test
+        // the Cypress.Blob.imgSrcToDataURL promise to our e2e
         // append the image
         $div.append(img)
 
@@ -46,7 +46,7 @@ context('Utilities', () => {
     })
   })
 
-  it('Cypress.minimatch - test out glob patterns against strings', () => {
+  it('Cypress.minimatch - e2e out glob patterns against strings', () => {
     // https://on.cypress.io/minimatch
     let matching = Cypress.minimatch('/users/1/comments', '/users/*/comments', {
       matchBase: true,

@@ -9,7 +9,7 @@ context('Files', () => {
     cy.visit('https://example.cypress.io/commands/files')
 
     // load example.json fixture file and store
-    // in the test context object
+    // in the e2e context object
     cy.fixture('example.json').as('example')
   })
 
@@ -34,9 +34,9 @@ context('Files', () => {
 
   it('cy.fixture() or require - load a fixture', function () {
     // we are inside the "function () { ... }"
-    // callback and can use test context object "this"
+    // callback and can use e2e context object "this"
     // "this.example" was loaded in "beforeEach" function callback
-    expect(this.example, 'fixture in the test context')
+    expect(this.example, 'fixture in the e2e context')
       .to.deep.equal(requiredExample)
 
     // or use "cy.wrap" and "should('deep.equal', ...)" assertion

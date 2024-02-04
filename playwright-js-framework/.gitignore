@@ -31,3 +31,7 @@ coverage/
 # Security
 *.cert
 *.key
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

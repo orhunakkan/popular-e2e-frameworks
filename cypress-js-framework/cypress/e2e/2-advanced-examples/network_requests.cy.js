@@ -81,21 +81,21 @@ context('Network Requests', () => {
           .and.to.be.gt(100)
 
         // we don't know the user id here - since it was in above closure
-        // so in this test just confirm that the property is there
+        // so in this e2e just confirm that the property is there
         expect(response.body).property('userId').to.be.a('number')
       })
   })
 
-  it('cy.request() - save response in the shared test context', () => {
+  it('cy.request() - save response in the shared e2e context', () => {
     // https://on.cypress.io/variables-and-aliases
     cy.request('https://jsonplaceholder.cypress.io/users?_limit=1')
       .its('body').its('0') // yields the first element of the returned list
-      .as('user') // saves the object in the test context
+      .as('user') // saves the object in the e2e context
       .then(function () {
         // NOTE 👀
         //  By the time this callback runs the "as('user')" command
-        //  has saved the user object in the test context.
-        //  To access the test context we need to use
+        //  has saved the user object in the e2e context.
+        //  To access the e2e context we need to use
         //  the "function () { ... }" callback form,
         //  otherwise "this" points at a wrong or undefined object!
         cy.request('POST', 'https://jsonplaceholder.cypress.io/posts', {
@@ -107,7 +107,7 @@ context('Network Requests', () => {
       })
       .then(function () {
         // When this callback runs, both "cy.request" API commands have finished
-        // and the test context has "user" and "post" objects set.
+        // and the e2e context has "user" and "post" objects set.
         // Let's verify them.
         expect(this.post, 'post has the right user id').property('userId').to.equal(this.user.id)
       })
