@@ -1,4 +1,4 @@
-const {test, expect} = require('@playwright/test');
+import {test, expect} from '@playwright/test';
 
 test.describe('Network Requests', () => {
     test.beforeEach(async ({page}) => {
@@ -18,7 +18,6 @@ test.describe('Network Requests', () => {
         const body = await response.json();
         expect(response.status()).toBe(200);
         expect(body.length).toBeGreaterThanOrEqual(500); // Assuming the response length to be 500 or more
-        // Includes keys validation can be done similarly if needed
     });
 
     test('cy.request() with query parameters', async ({request}) => {
