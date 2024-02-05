@@ -23,7 +23,6 @@ test.describe('example to-do app', () => {
     test('can check off an item as completed', async ({page}) => {
         await page.check('input[type="checkbox"]')
         const hasCompletedClass = await (await page.$('li.completed')).isNotNull()
-
         expect(hasCompletedClass).toEqual(true)
     });
 
