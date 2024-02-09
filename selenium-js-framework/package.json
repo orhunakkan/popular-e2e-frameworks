@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "mocha"
+    "test": "./node_modules/.bin/cucumber-js --require ./e2e/cucumber.conf.js --require ./e2e/step_definitions"
   },
   "author": "Orhun Akkan",
   "license": "ISC",
@@ -14,5 +14,8 @@
     "chai": "^5.0.3",
     "mocha": "^10.2.0",
     "selenium-webdriver": "^4.17.0"
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^10.3.1"
   }
 }
