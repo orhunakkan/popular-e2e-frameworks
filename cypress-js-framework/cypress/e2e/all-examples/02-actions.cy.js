@@ -7,9 +7,9 @@ context('Actions', () => {
         cy.get('.action-email').type('fake@email.com').should('have.value', 'fake@email.com')
             .type('{leftarrow}{rightarrow}{uparrow}{downarrow}')
             .type('{del}{selectall}{backspace}')
-            .type('{alt}{option}') //these are equivalent
-            .type('{ctrl}{control}') //these are equivalent
-            .type('{meta}{command}{cmd}') //these are equivalent
+            .type('{alt}{option}')
+            .type('{ctrl}{control}')
+            .type('{meta}{command}{cmd}')
             .type('{shift}')
             .type('slow.typing@email.com', {delay: 100})
             .should('have.value', 'slow.typing@email.com');
@@ -109,12 +109,9 @@ context('Actions', () => {
         cy.get('.action-select').should('have.value', '--Select a fruit--');
         cy.get('.action-select').select('apples');
         cy.get('.action-select').should('have.value', 'fr-apples');
-        cy.get('.action-select-multiple')
-            .select(['apples', 'oranges', 'bananas'])
-            .invoke('val')
-            .should('deep.equal', ['fr-apples', 'fr-oranges', 'fr-bananas']);
+        cy.get('.action-select-multiple').select(['apples', 'oranges', 'bananas']);
+        cy.invoke('val').should('deep.equal', ['fr-apples', 'fr-oranges', 'fr-bananas']);
         cy.get('.action-select').select('fr-bananas')
-            // can attach an assertion right away to the element
             .should('have.value', 'fr-bananas');
         cy.get('.action-select-multiple')
             .select(['fr-apples', 'fr-oranges', 'fr-bananas'])

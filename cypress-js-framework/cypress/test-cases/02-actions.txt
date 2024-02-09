@@ -1,0 +1,78 @@
+Feature: Actions on example.cypress.io/commands/actions page
+
+ Scenario: Typing into an email DOM element
+    Given I am on the 'commands/actions' page
+    When I type 'fake@email.com' into the 'action-email' input
+    Then the input should have value 'fake@email.com'
+    And when I perform various keyboard strokes and type 'slow.typing@email.com', the input should have this value
+    And when I type 'disabled error checking' into the 'action-disabled' input, the input should have this value
+
+  Scenario: Focusing on a DOM element
+    Given I am on the 'commands/actions' page
+    When I focus on the 'action-focus' element
+    Then the element should have class 'focus'
+    And the element before it should have style 'color: orange;'
+
+  Scenario: Blurring off from a DOM element
+    Given I am on the 'commands/actions' page
+    When I type 'About to blur' into the 'action-blur' element and blur it
+    Then the element should have class 'error'
+    And the element before it should have style 'color: red;'
+
+  Scenario: Clearing an input or textarea element
+    Given I am on the 'commands/actions' page
+    When I type and clear 'Clear this text' into the 'action-clear' input
+    Then the input should have value ''
+
+  Scenario: Submitting a form
+    Given I visit the 'commands/actions' page
+    When I type 'HALFOFF' into the 'action-form' input and submit form
+    Then it should display 'Your form has been submitted!' at the next element
+
+  Scenario: Clicking on a DOM element
+       Given I am on the 'commands/actions' page
+       When I click at different positions on the 'action-canvas'
+       And also click on various buttons with given specifications
+       Then it should complete without any unexpected errors
+
+  Scenario: Double-clicking on a DOM element
+       Given I am on the 'commands/actions' page
+       When I double-click on the 'action-div' element
+       Then the 'action-div' element should not be visible
+       And 'action-input-hidden' element should be visible
+
+  Scenario: Right-clicking on a DOM element
+       Given I am on the 'commands/actions' page
+       When I right-click on the 'rightclick-action-div' element
+       Then the 'rightclick-action-div' element should not be visible
+       And 'rightclick-action-input-hidden' element should be visible
+
+  Scenario: Checking a checkbox or radio element
+       Given I am on the 'commands/actions' page
+       When I check various checkboxes and radio buttons with given specifications
+       Then all checked elements should be in checked state
+
+  Scenario: Unchecking a checkbox
+       Given I am on the 'commands/actions' page
+       When I uncheck various checkboxes with given specifications
+       Then all unchecked elements should not be in checked state
+
+  Scenario: Selecting an option in a select element
+       Given I am on the 'commands/actions' page
+       When I select given options from the 'action-select' and 'action-select-multiple' elements
+       Then the selected elements should have the expected values
+
+  Scenario: Scrolling an element into view
+       Given I am on the 'commands/actions' page
+       When I scroll the given buttons into view
+       Then the buttons should be visible
+
+  Scenario: Triggering an event on a DOM element
+       Given I am on the 'commands/actions' page
+       When I change the value of 'trigger-input-range' to 25 and trigger change event
+       Then the sibling paragraph of 'input[type=range]' should have text '25'
+
+  Scenario: Scrolling the window or element to a position
+       Given I am on the 'commands/actions' page
+       When I scroll the window and the elements to the specified positions
+       Then it should complete without any unexpected errors

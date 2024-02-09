@@ -1,0 +1,15 @@
+Feature: Aliasing in Cypress
+
+    Scenario: Alias a DOM element for later use
+        Given I visit 'https://example.cypress.io/commands/aliasing'
+        When I find the first button in the first td of the first tr of the as-table and alias it as 'firstBtn'
+        And I click on the '@firstBtn' alias
+        Then '@firstBtn' should have the class 'btn-success'
+        And '@firstBtn' should contain the text 'Changed'
+
+    Scenario: Alias a network route for later use
+        Given I visit 'https://example.cypress.io/commands/aliasing'
+        When I intercept 'GET' requests to '**/comments/*' and alias it as 'getComment'
+        And I click the '.network-btn'
+        And I wait for the '@getComment' request to finish
+        Then the status code of the '@getComment' response should be equal to 200

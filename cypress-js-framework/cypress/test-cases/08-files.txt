@@ -1,0 +1,28 @@
+Feature: Files
+  Scenario: Load a fixture
+    Given I visit "https://example.cypress.io/commands/files"
+    And I establish a fixture alias 'example' with 'example.json'
+    And I intercept GET requests to '**/comments/*' with fixture 'example.json' and alias as 'getComment'
+    When I click on '.fixture-btn'
+    Then I wait for '@getComment'
+    Then the response body should have a 'name' property
+    And the 'name' property should include 'Using fixtures to represent data'
+
+  Scenario: Load a fixture using 'cy.fixture()' or 'require'
+    Given I visit "https://example.cypress.io/commands/files"
+    And I establish a fixture alias 'example' with 'example.json'
+    When these are loaded successfully
+    Then The fixture in the e2e context should deeply equal to 'requiredExample'
+
+  Scenario: Read file contents
+    Given I visit "https://example.cypress.io/commands/files"
+    When I read the Cypress configuration file
+    Then the file content should be a string
+
+  Scenario: Write to a file
+    Given I visit "https://example.cypress.io/commands/files"
+    When I make a request to 'https://jsonplaceholder.cypress.io/users'
+    And I write the response body to 'cypress/fixtures/users.json'
+    Then the first user name in 'users' fixture should exist
+    When I write '{ "id": 8739, "name": "Jane", "email": "jane@example.com" }' to 'cypress/fixtures/profile.json'
+    Then the profile name in 'profile' fixture should equal 'Jane'

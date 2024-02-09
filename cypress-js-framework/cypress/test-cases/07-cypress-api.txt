@@ -1,0 +1,54 @@
+Feature: Cypress APIs
+
+  Scenario: Manipulate and examine Cypress Commands
+    Given the user visits the Cypress API webpage
+    When the user creates a custom command '.console'
+    And capture any element with the tag 'button' using the '.console' command
+    Then the custom command should be added successfully
+
+  Scenario: Enable debug, set, and clear cookies using Cypress.Cookies
+    Given the user visits the Cypress API webpage
+    When the user enables debugging using '.debug()'
+    And set a cookie 'fakeCookie' with value '123ABC'
+    And then clear the 'fakeCookie'
+    And set and clear the 'fakeCookie' cookie twice more
+    Then the cookie should be handled correctly
+
+  Scenario: Get CPU architecture name of underlying OS
+    Given the user visits the Cypress API webpage
+    Then the Cypress property 'arch' should exist
+
+  Scenario: Get and set configuration options
+    Given the user visits the Cypress API webpage
+    When the user retrieves the Cypress configuration
+    Then the configuration should have the default Cypress properties with their default values
+    And if user sets the 'pageLoadTimeout' to '20000'
+    Then the configuration's 'pageLoadTimeout' value should be '20000'
+
+  Scenario: Determine if a DOM element is hidden
+    Given the user visits the Cypress API webpage
+    When the user tries to find hidden and visible paragraphs
+    Then the hidden paragraph should be hidden
+    And the visible paragraph should not be hidden
+
+  Scenario: Get and set environment variables
+    Given the user visits the Cypress API webpage
+    When the user sets the 'host' and 'api_server' environment variables
+    And then the user overwrites the 'api_server' environment variable
+    Then the variables should be set and updated successfully
+
+  Scenario: Control what is printed to the Command Log
+    Given the user visits the Cypress API webpage
+    Then the user should be able to control what is printed to the command log
+
+  Scenario: Get underlying OS name
+    Given the user visits the Cypress API webpage
+    Then the Cypress property 'platform' should exist
+
+  Scenario: Get current version of Cypress being run
+    Given the user visits the Cypress API webpage
+    Then the Cypress property 'version' should exist
+
+  Scenario: Get current spec information
+    Given the user visits the Cypress API webpage
+    Then the Cypress property 'spec' should exist and should include keys 'name', 'relative', and 'absolute'

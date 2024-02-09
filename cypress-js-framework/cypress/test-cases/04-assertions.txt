@@ -1,0 +1,44 @@
+Feature: Implicit Assertions
+    Scenario: Validate class, text, html, and visibility of specific content in assertion-table
+        Given the page 'https://example.cypress.io/commands/assertions' is accessible
+        When Cypress finds the last 'tbody tr' within 'assertion-table' class
+        Then there should be a 'success' class
+        And the first 'td' should contain text, html, and match 'Column content'
+        And it should be visible
+
+    Scenario: Validate link within assertions-link class
+        Given the page 'https://example.cypress.io/commands/assertions' is accessible
+        When Cypress gets the '.assertions-link'
+        Then it should have 'active' class
+        And it should have 'href' attribute
+        And the href should include 'cypress.io'
+
+Feature: Explicit Assertions
+    Scenario: Test hardcoded assertions to be true
+        Given the statement is true
+        Then the expression should be true
+
+    Scenario: Validate object and string matches
+        Given an object with 'foo: bar'
+        And a string 'FooBar'
+        Then the object should deeply equal to {foo: 'bar'}
+        And the string should match pattern '/bar$/i'
+
+    Scenario: Test text content within multiple paragraphs
+        Given the class '.assertions-p' contains p tags with certain texts
+        Then those paragraphs should be 3 in number
+        And should have certain expected texts
+
+    Scenario: Test element existence and class name match using callback function
+        Given class '.docs-header' contains a div
+        Then the div's class name should match the pattern '/heading-/'
+        And the div's text content should be 'Introduction'
+
+    Scenario: Assert shape of an object
+        Given an object named 'person' with keys 'name' and 'age'
+        Then the given 'person' object should be an object
+
+    Scenario: Retry the test until the assertion passes
+        Given an element with id 'random-number' containing a floating point number as text
+        Then the text should be converted to a number
+        And the number should be between 1 and 10 inclusive

@@ -1,0 +1,41 @@
+Feature: Cookies
+
+  Background:
+    Given the browser is at 'https://example.cypress.io/commands/cookies'
+    And the browser cookies are cleared
+
+  Scenario: Getting a single cookie
+    When the user sets a cookie with name 'token' and value '123ABC'
+    Then the browser should have a cookie named 'token' with value '123ABC'
+
+  Scenario: Getting all cookies for the current domain
+    When the user sets a cookie on the current domain
+    Then the list of browser cookies should include a cookie named 'token' with value '123ABC'
+    And the 'token' cookie should not be HTTP only and not secure
+    And the 'token' cookie should have a non-empty domain and path
+
+  Scenario: Getting all cookies
+    When the user sets two cookies named 'key' with value 'value', one for the current domain and one for '.example.com'
+    Then the list of all browser cookies should include 2 cookies named 'key', each with value 'value'
+    And each 'key' cookie should not be HTTP only and not secure
+    And each 'key' cookie should have a non-empty domain and path
+    And one 'key' cookie should have domain '.example.com'
+
+  Scenario: Setting a cookie
+    When the user sets a browser cookie named 'foo' with value 'bar'
+    Then the browser should have a cookie named 'foo' with value 'bar'
+
+  Scenario: Clearing a single cookie
+    When the user sets a cookie with name 'token' and value '123ABC'
+    And the user clears the browser cookie named 'token'
+    Then the browser should not have a cookie named 'token'
+
+  Scenario: Clearing all cookies for the current domain
+    When the user sets a cookie on the current domain
+    And the user clears all browser cookies for the current domain
+    Then the list of browser cookies should be empty
+
+  Scenario: Clearing all cookies
+    When the user sets two cookies named 'key' with value 'value', one for the current domain and one for '.example.com'
+    And the user clears all browser cookies
+    Then the list of all browser cookies should be empty

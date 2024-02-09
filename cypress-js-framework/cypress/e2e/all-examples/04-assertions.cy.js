@@ -89,7 +89,6 @@ context('Assertions', () => {
             cy.get('.two-elements')
                 .find('.first')
                 .then(($first) => {
-                    // save text from the first element
                     text = normalizeText($first.text());
                 });
 

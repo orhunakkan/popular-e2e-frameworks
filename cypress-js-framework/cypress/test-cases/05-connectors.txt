@@ -1,0 +1,43 @@
+Feature: Cypress Connector Commands
+
+    Background:
+        Given the web page at 'https://example.cypress.io/commands/connectors' is visited
+
+    Scenario: '.each()' method is called on array of elements
+        When '.each()' method is called on array of elements with selector '.connectors-each-ul>li'
+        Then the elements are iterated over successfully
+
+
+    Scenario: '.its()' method is called on a list of elements
+        When '.its()' method is called on a list of elements with selector '.connectors-its-ul>li'
+        Then the length property of the list should be more than 2
+
+
+    Scenario: '.invoke()' method is used to show a 'hidden' div element
+        When '.invoke()' method is called on an element with selector '.connectors-div'
+        Then the div element should become visible
+
+
+    Scenario: '.spread()' method is called on an array
+        When '.spread()' method is called on an array ['foo', 'bar', 'baz']
+        Then the individual parameters in the callback function should match the respective array elements
+
+
+    Scenario: '.then()' method invokes a callback function with the current subject
+        When '.then(() => {})' method is called with an array of 'li' elements
+        Then the callback function should be invoked with the selected elements as the arguments
+
+
+    Scenario: '.then()' method yields the returned value to the next command
+        When '.then(() => {})' method is called and value is returned
+        Then the next '.then(() => {})' method should receive the returned value as argument
+
+
+    Scenario: '.then()' method yields the original subject without return
+        When '.then(() => {})' method is called without return
+        Then the next '.then(() => {})' method should receive the original subject as argument
+
+
+    Scenario: '.then()' method yields the value yielded by the last Cypress command inside
+        When '.then(() => {})' method is called and contains an internal Cypress command
+        Then the next '.then(() => {})' method should receive the value yielded by the internal command as argument

@@ -1,0 +1,39 @@
+Feature: Example To-Do App
+
+  Scenario: Initial display of to-do items
+    Given I visit the To-Do App
+    Then I should see exactly 2 to-do items
+    And the first item should be "Pay electric bill"
+    And the last item should be "Walk the dog"
+
+  Scenario: Adding a new to-do item
+    Given I visit the To-Do App
+    When I add a new item "Feed the cat"
+    Then I should see exactly 3 to-do items
+    And the last item should be "Feed the cat"
+
+  Scenario: Marking a to-do item as completed
+    Given I visit the To-Do App
+    When I check off the item "Pay electric bill" as completed
+    Then the item "Pay electric bill" should be marked as completed
+
+  Scenario: Filtering for uncompleted to-dos within checked tasks
+    Given I visit the To-Do App and check off the item "Pay electric bill" as completed
+    When I filter for active to-dos
+    Then I should see exactly 1 active to-do item
+    And that item should be "Walk the dog"
+    But I should not see the item "Pay electric bill"
+
+  Scenario: Filtering for completed to-dos within checked tasks
+    Given I visit the To-Do App and check off the item "Pay electric bill" as completed
+    When I filter for completed to-dos
+    Then I should see exactly 1 completed to-do item
+    And that item should be "Pay electric bill"
+    But I should not see the item "Walk the dog"
+
+  Scenario: Deleting all completed to-dos within checked tasks
+    Given I visit the To-Do App and check off the item "Pay electric bill" as completed
+    When I delete all completed to-dos
+    Then I should see exactly 1 to-do item left
+    But that item should not be "Pay electric bill"
+    And I should not see the "Clear completed" option
